@@ -1,4 +1,0 @@
-1) min width: 96px
-2) active tab options
-3) arrow after full name
-
