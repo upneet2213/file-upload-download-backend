@@ -1,0 +1,5 @@
+1) range-make more area editable, should not span to two lines //
+2) edit field-default value //
+3) what to do when edit field is out of range ?
+4) default values in edit should be selected //
+5) rating in sheet?
