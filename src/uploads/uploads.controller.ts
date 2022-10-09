@@ -46,6 +46,7 @@ export class UploadsController {
 
   @Get(':file')
   download(@Param() file) {
+    console.log(file);
     const newFile = createReadStream(join(process.cwd(), 'files/' + file.file));
     return new StreamableFile(newFile);
   }
