@@ -21,8 +21,14 @@ export class UsersService {
   async addFile(id: string, file: Express.Multer.File) {
     await this.userModel.updateOne({ id }, { $addToSet: { files: file } });
   }
-  async getUserFiles(id: string): Promise<Array<Express.Multer.File>> {
+  async getUserFiles(id: string, skip: number, limit: number) {
     const user = await this.getUser(id);
-    return user.files;
+    if (user.files) {
+      const files = user.files.filter((_, i) => {
+        return i >= Number(skip) && i < Number(skip) + Number(limit);
+      });
+      return { files, total: user.files.length };
+    }
+    return [];
   }
 }

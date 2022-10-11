@@ -6,6 +6,7 @@ import {
   UseInterceptors,
   StreamableFile,
   Param,
+  Query,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
@@ -14,13 +15,16 @@ import { diskStorage } from 'multer';
 import { join } from 'path';
 import { UsersService } from 'src/users/users.service';
 import { Helper } from './helper';
+import { PaginationParams } from './pagination.params';
 
 @Controller('uploads')
 export class UploadsController {
   constructor(private readonly usersService: UsersService) {}
-  @Get(':id')
-  files(@Param() param): Promise<Array<Express.Multer.File>> {
-    const files = this.usersService.getUserFiles(param.id);
+  @Get()
+  files(
+    @Query() { userId, skip, limit }: PaginationParams,
+  ) {
+    const files = this.usersService.getUserFiles(userId, skip, limit);
     return files;
   }
 

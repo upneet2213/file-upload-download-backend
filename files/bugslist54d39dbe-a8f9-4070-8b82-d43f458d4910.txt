@@ -1,0 +1,2 @@
+1) fix column drag and drop (screen not updating)
+2) fix column resizing (slow for some reason)
